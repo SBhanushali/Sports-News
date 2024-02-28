@@ -37,6 +37,18 @@ create table if not exists mydb.matches
     foreign key (tourId) references tours(id)
 );
 
+create table if not exists mydb.news
+(
+    id int auto_increment not null primary key,
+    title varchar(50) not null,
+    description text,
+    tourId int null,
+    matchId int null,
+    createdAt timestamp not null default current_timestamp,
+    foreign key (tourId) references tours(id),
+    foreign key (matchId) references matches(id)
+);
+
 -- seed data
 insert ignore into mydb.sports (id, name) values (1, 'Cricket');
 insert ignore into mydb.sports (id, name) values (2, 'Football');

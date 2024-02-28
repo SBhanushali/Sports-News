@@ -1,13 +1,15 @@
-const express = require('express');
+const express = require("express");
 const helper = require("./src/lib/helper");
-const config = require('./config/config');
+const config = require("./config/config");
 const app = express();
 const port = config.server.port;
 
+app.use(express.json());
+
 //Register routes
 helper
-    .fileList('./src/routes')
-    .forEach(filePath => require(`./${filePath.toString()}`)(app));
+  .fileList("./src/routes")
+  .forEach((filePath) => require(`./${filePath.toString()}`)(app));
 
 // Start the server
 app.listen(port, () => {
@@ -15,5 +17,5 @@ app.listen(port, () => {
 });
 
 module.exports = {
-  app: app
-}
+  app: app,
+};
