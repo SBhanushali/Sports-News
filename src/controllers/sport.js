@@ -1,21 +1,34 @@
-const Sport = require('../models/sport');
+const Sport = require("../models/sport");
 
 const getAllSportsToursAndMatches = async () => {
-    const matches = await Sport.getAllSportsToursAndMatches();
-    const res = {};
-    matches.forEach(match => {
-        const { sportName, tourName, matchName } = match;
-        if (!res[sportName]) {
-            res[sportName] = {};
-        }
-        if (!res[sportName][tourName]) {
-            res[sportName][tourName] = [];
-        }
-        res[sportName][tourName].push(matchName);
-    });
-    return res;
-}
+  const sportsToursAndMatches = await Sport.getAllSportsToursAndMatches();
+  const res = {};
+  sportsToursAndMatches.forEach((sportsToursAndMatch) => {
+    const {
+      sportName,
+      tourName,
+      matchName,
+      matchId,
+      matchStartTime,
+      matchFormat,
+    } = sportsToursAndMatch;
+    if (!res[sportName]) {
+      res[sportName] = {};
+    }
+    if (!res[sportName][tourName]) {
+      res[sportName][tourName] = [];
+    }
+    var match = {
+      id: matchId,
+      name: matchName,
+      startTime: matchStartTime,
+      format: matchFormat,
+    };
+    res[sportName][tourName].push(match);
+  });
+  return res;
+};
 
 module.exports = {
-    getAllSportsToursAndMatches: getAllSportsToursAndMatches
-}
+  getAllSportsToursAndMatches: getAllSportsToursAndMatches,
+};
