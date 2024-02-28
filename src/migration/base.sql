@@ -21,6 +21,8 @@ create table if not exists mydb.tours
     foreign key (sportId) references sports(id)
 );
 
+CREATE INDEX idx_name_tours ON tours(name);
+
 create table if not exists mydb.matches
 (
     id int auto_increment not null primary key,
